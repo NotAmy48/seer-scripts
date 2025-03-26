@@ -1,0 +1,23 @@
+if (WxSc.Util.GetBag1().length > 0) {
+  WxSc.OnFirstRound = () => { WxSc.Util.UseSkill(0); }
+  WxSc.OnUseSkill = async (mySkillInfo) => {
+    await WxSc.Util.DelayAsync(WxSc.Const.DelayMs);
+    if (mySkillInfo.remainHP != 0) {
+      WxSc.Util.UseSkill(0);
+    }
+    else {
+      WxSc.Util.ChangePetByID([]);
+    }
+  }
+  WxSc.OnChangePet = () => { WxSc.Util.UseSkill(0); }
+  WxSc.OnFightOver = () => {
+    WxSc.Util.StopAutoFight();
+    WxSc.Util.CurePet20HP();
+  }
+
+  WxSc.Util.SetIsAutoCure(false);
+  WxSc.Util.LowHP();
+}
+else {
+  alert('没有出战精灵');
+}
